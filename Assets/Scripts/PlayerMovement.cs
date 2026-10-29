@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         float currentSpeed = boost ? speed * boostMult : speed;
 
-        transform.Translate(Movement *  currentSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Movement *  currentSpeed * Time.deltaTime, Space.Self);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
@@ -48,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.X))
         {
             transform.Rotate(Vector3.up * rotationSpd * Time.deltaTime, Space.World);
+        }
+        if (Input.GetKey(KeyCode.Z))
+        {
+            transform.Rotate(Vector3.up * -rotationSpd * Time.deltaTime, Space.World);
         }
     }
 
