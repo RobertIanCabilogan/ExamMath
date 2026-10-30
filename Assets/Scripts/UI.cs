@@ -7,7 +7,9 @@ public class UI : MonoBehaviour
     public TMP_Text speedTXT;
     public TMP_Text sizeTXT;
     public TMP_Text rotationTXT;
-    
+    public TMP_Text distanceTXT;
+
+    private Vector3 startPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,5 +33,9 @@ public class UI : MonoBehaviour
         {
             speedTXT.text += " (Boost!)";
         }
+
+        float distance = Vector3.Distance(startPos, player.transform.position);
+
+        distanceTXT.text = "Distance: " + distance.ToString("F2") + " m";
     }
 }
