@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 public class UI : MonoBehaviour
 {
-    public PlayerMovement player;
+    public PlayerMoveScript player;
 
     public TMP_Text speedTXT;
     public TMP_Text sizeTXT;

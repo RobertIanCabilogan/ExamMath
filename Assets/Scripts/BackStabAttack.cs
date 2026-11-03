@@ -4,12 +4,11 @@ using Unity.VisualScripting;
 
 public class BackStabAttack : MonoBehaviour
 {
-
-    public Transform enemy;
     public float attackRange = 2f;
     public float bsAngle = -0.5f;
     public TMP_Text feedback;
 
+    public EnemyPatrol enemyPatrol;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,7 +26,15 @@ public class BackStabAttack : MonoBehaviour
 
     void Attack()
     {
-        float distance = Vector3.Distance(transform.position, enemy.position);
+
+        if (enemyPatrol == null)
+        {
+            feedback.text = "No Enemies!";
+            return;
+        }
+
+        Vector3 enemyPos = enemyPatrol.transform.position;
+        float distance = Vector3.Distance(transform.position, enemyPos);
 
         if (distance > attackRange)
         {
@@ -35,12 +42,12 @@ public class BackStabAttack : MonoBehaviour
             return;
         }
 
-        Vector3 directionToPlayer = transform.position - enemy.position;
+        Vector3 directionToPlayer = transform.position - enemyPatrol.transform.position;
 
         directionToPlayer.y = 0f;
         directionToPlayer.Normalize();
 
-        Vector3 enemyForward = enemy.forward;
+        Vector3 enemyForward = enemyPatrol.transform.forward;
         enemyForward.y = 0f;
         enemyForward.Normalize();
 
@@ -49,7 +56,7 @@ public class BackStabAttack : MonoBehaviour
         if (dotProduct > bsAngle)
         {
             feedback.text = "Backstab Success!";
-            Destroy(enemy.gameObject);
+            enemyPatrol.Death();
         }
         else
         {

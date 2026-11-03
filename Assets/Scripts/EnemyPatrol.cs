@@ -45,4 +45,9 @@ public class EnemyPatrol : MonoBehaviour
             }
         }
     }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
 }

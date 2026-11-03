@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -11,18 +12,27 @@ public class MovingPlatform : MonoBehaviour
     public bool isHazard = false;
     private int curentPoint = 0;
 
-
+    private Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+       rb = GetComponent<Rigidbody>();
+
+        rb.isKinematic = true;
+
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
     void Start()
     {
         if (points.Length > 0)
         {
-            transform.position = points[0].position;
+            rb.position = points[0].position;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (points.Length == 0)
         {
@@ -31,8 +41,10 @@ public class MovingPlatform : MonoBehaviour
 
         Transform target = points[curentPoint];
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, target.position)<0.01f)
+        Vector3 newPos = Vector3.MoveTowards(rb.position, target.position, speed * Time.fixedDeltaTime);
+
+        rb.MovePosition(newPos);
+        if(Vector3.Distance(newPos, target.position)<0.01f)
         {
             curentPoint++;
 
@@ -47,7 +59,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !isHazard)
         {
-            collision.transform.SetParent(transform);
+            collision.transform.SetParent(transform, true);
         }
     }
 
@@ -55,7 +67,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !isHazard)
         {
-            collision.transform.SetParent(null);
+            collision.transform.SetParent(null, true);
         }
     }
 }

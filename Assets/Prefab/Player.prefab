@@ -1155,7 +1155,8 @@ GameObject:
   - component: {fileID: 1294614703574456818}
   - component: {fileID: 7678984528280508965}
   - component: {fileID: 8761009505112428403}
-  - component: {fileID: 2537322402511845279}
+  - component: {fileID: 8015406974086182057}
+  - component: {fileID: 4656340178891162412}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1171,7 +1172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805605957462013025}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0708077, y: -1.9847527, z: -5.0881023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1271,7 +1272,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &2537322402511845279
+--- !u!114 &8015406974086182057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805605957462013025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2b2ad4afe46ac4080fd2435ff34f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackStabAttack
+  attackRange: 2
+  bsAngle: -0.5
+  feedback: {fileID: 0}
+  enemyPatrol: {fileID: 0}
+--- !u!114 &4656340178891162412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
